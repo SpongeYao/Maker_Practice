@@ -125,16 +125,16 @@ class App:
     def btn_findGreen_click(self):
         #---- BGR轉成 hsv通道
         imgHSV = cv2.cvtColor(self.frame.copy(), cv2.COLOR_BGR2HSV)
-        #---- 定義上下界線 -------
-        lower_color = np.array([35, 43, 46])
-        upper_color = np.array([77, 225, 225])
+        #---- 定義上下界線 [ Opencv (H,S,V): (0~180, 0~255, 0~255) ; H,S,V: (0~360, 0~1, 0~1)]
+        lower_color = np.array([38, 43, 46])
+        upper_color = np.array([83, 225, 225])
 
         plants = cv2.inRange(imgHSV, lower_color , upper_color)
         ctrs,_ = cv2.findContours(plants,cv2.RETR_EXTERNAL ,cv2.CHAIN_APPROX_SIMPLE)
         ctrs = filter(lambda x : cv2.contourArea(x) > 13 , ctrs)
         image= self.frame.copy()
         for c in ctrs:
-            cv2.drawContours(image, [c], 0, (0,0,255), 1)
+            cv2.drawContours(image, [c], 0, (0,0,255), 2)
         self.display_panel(image)
 
         pass 
