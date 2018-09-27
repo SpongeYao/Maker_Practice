@@ -118,7 +118,8 @@ class App:
 
 root = Tkinter.Tk()
 root.title("範例")
-root.attributes('-zoomed', True) #放到最大 
+root.attributes('-zoomed', True) #Linux OS 
+#root.state('zoomed')	#Windows OS
 app = App(root)
 root.mainloop()
 
